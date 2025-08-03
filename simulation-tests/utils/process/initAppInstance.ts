@@ -42,6 +42,7 @@ export const initAppInstance = (args: string[], kind: Kind): AppInstance => {
       writeText: (text: string) => stream.write(textEncoder.encode(text)),
       async end() {
         stream.releaseLock();
+        process.stdin.close();
         process.kill();
 
         await delay(10);

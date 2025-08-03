@@ -9,6 +9,6 @@ Deno.test(
   "Simulator runs the server",
   withSim(async ({ simCtx }) => {
     const { text } = await simCtx.serverInstances[0].getText("/");
-    expect(text).toEqual("Hello");
+    expect(text).toEqual("Hello Hono!");
   })
 );
