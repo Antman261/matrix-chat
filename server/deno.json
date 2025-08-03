@@ -1,5 +1,4 @@
 {
-  "name": "@mchat/svr",
   "imports": {
     "@std/cli": "jsr:@std/cli@^1.0.21",
     "hono": "jsr:@hono/hono@^4.7.8"

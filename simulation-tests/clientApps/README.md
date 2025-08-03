@@ -1,0 +1,1 @@
+Client apps consume the client package and implement behavior by interacting with a server
