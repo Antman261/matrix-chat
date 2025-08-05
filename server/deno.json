@@ -9,9 +9,5 @@
   "fmt":{
     "singleQuote": true,
     "semiColons": true
-  },
-  "compilerOptions": {
-    "jsx": "precompile",
-    "jsxImportSource": "hono/jsx"
   }
 }
