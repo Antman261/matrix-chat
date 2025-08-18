@@ -5,10 +5,12 @@ import { delay } from "@std/async/delay";
 import { releasePort, requestPort } from "./portManager.ts";
 
 export type AppInstance = {
+  logs: string[];
   port: number;
   readonly status: "starting" | "running" | "exited";
   process: Deno.ChildProcess;
   writeText(text: string): Promise<void>;
+  writeLine(text: string): Promise<void>;
   end(): Promise<void>;
 };
 
@@ -19,17 +21,22 @@ export const initAppInstance = (args: string[], kind: Kind): AppInstance => {
     args.push(`--port=${port}`);
     const process = toPipedDeno(args).spawn();
     const log = makeLogger(kind, process.pid);
+    const logs: string[] = [];
+
     (async () => {
       for await (const logLine of process.stderr
         .pipeThrough(new TextDecoderStream())
-        .pipeThrough(new TextLineStream()))
+        .pipeThrough(new TextLineStream())) {
         log.error(logLine);
+      }
     })();
     (async () => {
       for await (const logLine of process.stdout
         .pipeThrough(new TextDecoderStream())
-        .pipeThrough(new TextLineStream()))
+        .pipeThrough(new TextLineStream())) {
         log(logLine);
+        logs.push(logLine);
+      }
     })();
     process.ref();
     const stream = process.stdin.getWriter();
@@ -39,7 +46,11 @@ export const initAppInstance = (args: string[], kind: Kind): AppInstance => {
       process,
       status,
       port,
+      logs,
       writeText: (text: string) => stream.write(textEncoder.encode(text)),
+      writeLine: (text: string) =>
+        stream.write(textEncoder.encode(text + "\n")),
+
       async end() {
         stream.releaseLock();
         process.stdin.close();

@@ -10,7 +10,7 @@ Instead of homeservers being the "atomic unit of community", communities are org
 * Serve the client and server together as a desktop application
 * Also be able to run the server separately via docker
 * Would be cool if the server also served its own admin portal
-* Might use CBOR
+* Might use CBOR later, dunno
 
 ## Big Questions
 
@@ -30,7 +30,7 @@ Idea: Could implement test client as cli program to simplify developing the serv
 
 Endpoints:
 * `GET /auth/metadata` Returns data about authentication
-* `POST /auth/register` Create a user account signed by the server*
+* `POST /auth/register` Create a user account, returns token signed by the server*
 * `POST /auth/login` Returns a new refresh token*
 * `POST /auth/logout` Invalidates a refresh token and deletes the device from the user's devices
-* `POST /auth/refresh` Refreshes and access token
+* `POST /auth/refresh` Refreshes and access tokensync

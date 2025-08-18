@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@antman/formic-utils@0.2": "0.2.0",
     "jsr:@std/assert@1": "1.0.13",
     "jsr:@std/assert@^1.0.12": "1.0.13",
     "jsr:@std/assert@^1.0.13": "1.0.13",
@@ -19,6 +20,9 @@
     "npm:pure-rand@^7.0.1": "7.0.1"
   },
   "jsr": {
+    "@antman/formic-utils@0.2.0": {
+      "integrity": "7659345179d03dda0933085317f26f5c2976af69029b954057416d781d47ea60"
+    },
     "@std/assert@1.0.13": {
       "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
       "dependencies": [
@@ -77,6 +81,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@antman/formic-utils@0.2",
       "jsr:@std/assert@1",
       "jsr:@std/async@^1.0.14",
       "jsr:@std/expect@^1.0.16",
